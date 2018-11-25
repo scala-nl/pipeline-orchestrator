@@ -82,7 +82,7 @@ sed "s/MORPHL_SERVER_IP_ADDRESS/${MORPHL_SERVER_IP_ADDRESS}/g" /opt/orchestrator
 cat /opt/orchestrator/bootstrap/runasairflow/templates/hdfs-site.xml.template > /opt/hadoop/etc/hadoop/hdfs-site.xml
 echo ${MORPHL_SERVER_FQDN} > /opt/hadoop/etc/hadoop/slaves
 /opt/hadoop/bin/hdfs namenode -format &>/dev/null
-start_hdfs.sh
+# start_hdfs.sh
 
 cqlsh ${MORPHL_SERVER_IP_ADDRESS} -u cassandra -p cassandra -e "CREATE USER morphl WITH PASSWORD '${MORPHL_CASSANDRA_PASSWORD}' SUPERUSER;"
 cqlsh ${MORPHL_SERVER_IP_ADDRESS} -u cassandra -p cassandra -e "ALTER USER cassandra WITH PASSWORD '${NONDEFAULT_SUPERUSER_CASSANDRA_PASSWORD}';"
@@ -96,7 +96,7 @@ cp /opt/orchestrator/bootstrap/runasairflow/bash/airflow/*_airflow.sh /opt/anaco
 airflow version
 airflow initdb
 python /opt/orchestrator/bootstrap/runasairflow/python/set_up_airflow_authentication.py
-start_airflow.sh
+# start_airflow.sh
 
 cd /opt/orchestrator && sudo git pull
 
